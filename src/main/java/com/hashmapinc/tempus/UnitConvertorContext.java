@@ -10,7 +10,7 @@ import com.hashmapinc.tempus.service.UnitConvertorServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class UnitConvertorContext {
+public class UnitConvertorContext {
 
     private static UnitConvertorService unitConvertorService;
 
@@ -23,7 +23,7 @@ class UnitConvertorContext {
     private UnitConvertorContext() {
     }
 
-    static UnitConvertorService getInstanceOfUnitConvertorService() throws UnitConvertorContextException {
+    public static UnitConvertorService getInstanceOfUnitConvertorService() throws UnitConvertorContextException {
         try {
             if (unitConvertorService == null) {
                 unitConvertorService = new UnitConvertorServiceImpl(workbookFile, unitSetSheet);
@@ -35,7 +35,7 @@ class UnitConvertorContext {
         }
     }
 
-    static QuantityClassSetService getInstanceOfQuantityClassSetService() throws UnitConvertorContextException {
+    public static QuantityClassSetService getInstanceOfQuantityClassSetService() throws UnitConvertorContextException {
         try {
             if (quantityClassSetService == null) {
                 quantityClassSetService =  new QuantityClassSetServiceImpl(workbookFile, quantityClassSheet);
