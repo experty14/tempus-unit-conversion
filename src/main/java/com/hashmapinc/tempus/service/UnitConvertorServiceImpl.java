@@ -6,7 +6,6 @@ import com.hashmapinc.tempus.model.UnitConstants;
 import com.hashmapinc.tempus.model.UnitSet;
 import com.hashmapinc.tempus.model.UnitSetCell;
 import com.hashmapinc.tempus.util.XlsReaderUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
 public class UnitConvertorServiceImpl implements UnitConvertorService {
 
     private Map<String, UnitSet> unitSetMap;

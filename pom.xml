@@ -7,7 +7,7 @@
     <groupId>com.hashmapinc.tempus</groupId>
     <artifactId>tempus-unit-conversion</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>Tempus Unit Conversion</name>
     <description>Provide API's for unit conversion</description>
@@ -23,7 +23,6 @@
     <properties>
         <apache.poi.version>3.17</apache.poi.version>
         <lombok.version>1.18.0</lombok.version>
-        <slf4j.version>1.7.25</slf4j.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -159,16 +158,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

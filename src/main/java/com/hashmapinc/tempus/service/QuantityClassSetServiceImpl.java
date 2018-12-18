@@ -3,7 +3,6 @@ package com.hashmapinc.tempus.service;
 import com.hashmapinc.tempus.exception.QuantityClassSetException;
 import com.hashmapinc.tempus.model.QuantityClassCell;
 import com.hashmapinc.tempus.util.XlsReaderUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -14,7 +13,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-@Slf4j
 public class QuantityClassSetServiceImpl implements QuantityClassSetService {
 
     private Map<String, Set<String>> quantityClassMemberUnits;

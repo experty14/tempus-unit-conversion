@@ -7,9 +7,7 @@ import com.hashmapinc.tempus.service.QuantityClassSetService;
 import com.hashmapinc.tempus.service.QuantityClassSetServiceImpl;
 import com.hashmapinc.tempus.service.UnitConvertorService;
 import com.hashmapinc.tempus.service.UnitConvertorServiceImpl;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class UnitConvertorContext {
 
     private static UnitConvertorService unitConvertorService;
