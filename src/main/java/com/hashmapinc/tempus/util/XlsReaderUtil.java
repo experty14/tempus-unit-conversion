@@ -3,9 +3,8 @@ package com.hashmapinc.tempus.util;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
+import java.io.InputStream;
 
 public class XlsReaderUtil {
 
@@ -13,10 +12,15 @@ public class XlsReaderUtil {
     private static final String PI = "3.14159";
 
     public Workbook getWorkbook(String workBook) throws IOException, InvalidFormatException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(Objects.requireNonNull(classLoader.getResource(workBook)).getFile());
 
-        return WorkbookFactory.create(file);
+        InputStream inputStream = ClassLoader.getSystemClassLoader()
+                .getResourceAsStream(workBook);
+
+        if (inputStream != null) {
+            return WorkbookFactory.create(inputStream);
+        } else {
+            throw new IOException("Error in creating InputSteam");
+        }
     }
 
     public Sheet getSheetFromWorkbook(Workbook workbook, String sheetName) {
