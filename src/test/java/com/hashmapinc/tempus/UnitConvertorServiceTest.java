@@ -4,88 +4,97 @@ import com.hashmapinc.tempus.exception.UnitConvertorContextException;
 import com.hashmapinc.tempus.exception.UnitConvertorException;
 import com.hashmapinc.tempus.model.Quantity;
 import com.hashmapinc.tempus.service.UnitConvertorService;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class UnitConvertorServiceTest {
 
     private UnitConvertorService unitConvertorService;
     private String testUnit = "testUnit";
 
-    @Before
+    @BeforeAll
     public void setUp() throws UnitConvertorContextException {
         unitConvertorService = UnitConvertorContext.getInstanceOfUnitConvertorService();
     }
 
     @Test
     public void createUnitConvertorService() {
-        Assert.assertNotNull(unitConvertorService);
+        Assertions.assertNotNull(unitConvertorService);
     }
 
     @Test
     public void convertToSiUnitMeterShouldReturnMeter() throws UnitConvertorException {
         Quantity quantity = new Quantity(10.0, "m");
         Quantity siQuantity = unitConvertorService.convertToSiUnit(quantity);
-        Assert.assertNotNull(siQuantity);
-        Assert.assertEquals(quantity, siQuantity);
+        Assertions.assertNotNull(siQuantity);
+        Assertions.assertEquals(quantity, siQuantity);
     }
 
     @Test
     public void convertToSiUnitKiloMeter() throws UnitConvertorException {
         Quantity quantity = new Quantity(10.0, "km");
         Quantity siQuantity = unitConvertorService.convertToSiUnit(quantity);
-        Assert.assertNotNull(siQuantity);
+        Assertions.assertNotNull(siQuantity);
 
-        Assert.assertEquals(Double.valueOf(10000.0), siQuantity.getValue());
+        Assertions.assertEquals(Double.valueOf(10000.0), siQuantity.getValue());
     }
 
     @Test
     public void convertToTargetUnit() throws UnitConvertorException {
         Quantity quantity = new Quantity(10.0, "m");
         Quantity targetQuantity = unitConvertorService.convertToTargetUnit(quantity, "km");
-        Assert.assertNotNull(targetQuantity);
-        Assert.assertEquals(Double.valueOf(0.01), targetQuantity.getValue());
+        Assertions.assertNotNull(targetQuantity);
+        Assertions.assertEquals(Double.valueOf(0.01), targetQuantity.getValue());
     }
 
     @Test
     public void convertToTargetUnitMeterShouldReturnMeter() throws UnitConvertorException {
         Quantity quantity = new Quantity(10.0, "m");
         Quantity targetQuantity = unitConvertorService.convertToTargetUnit(quantity, "m");
-        Assert.assertNotNull(targetQuantity);
-        Assert.assertEquals(quantity, targetQuantity);
+        Assertions.assertNotNull(targetQuantity);
+        Assertions.assertEquals(quantity, targetQuantity);
     }
 
     @Test
     public void convertToTargetUnitKiloMeterShouldReturnFeet() throws UnitConvertorException {
         Quantity quantity = new Quantity(2.5, "km");
         Quantity targetQuantity = unitConvertorService.convertToTargetUnit(quantity, "ft");
-        Assert.assertNotNull(targetQuantity);
-        Assert.assertEquals(Double.valueOf(8202.099737532808), targetQuantity.getValue());
-        Assert.assertEquals("ft", targetQuantity.getUnit());
+        Assertions.assertNotNull(targetQuantity);
+        Assertions.assertEquals(Double.valueOf(8202.099737532808), targetQuantity.getValue());
+        Assertions.assertEquals("ft", targetQuantity.getUnit());
     }
 
-    @Test(expected = UnitConvertorException.class)
+    @Test
     public void convertQuantityToSiUnitThrowException() throws UnitConvertorException {
         Quantity quantity = new Quantity(10.0, testUnit);
         unitConvertorService.convertToSiUnit(quantity);
+        Assertions.assertThrows(UnitConvertorException.class, () -> {
+            unitConvertorService.convertToSiUnit(quantity);
+        });
     }
 
-    @Test(expected = UnitConvertorException.class)
+    @Test
     public void convertToTargetUnitWithBothInvalidUnitsThrowException() throws UnitConvertorException {
         Quantity quantity = new Quantity(2.5 , testUnit);
-        unitConvertorService.convertToTargetUnit(quantity , "testUnit1");
+        Assertions.assertThrows(UnitConvertorException.class, () -> {
+            unitConvertorService.convertToTargetUnit(quantity , "testUnit1");
+        });
     }
 
-    @Test(expected = UnitConvertorException.class)
+    @Test
     public void convertToTargetUnitWithTagetAsInvalidUnitThrowException() throws UnitConvertorException {
         Quantity quantity = new Quantity(10.0 , "m");
-        unitConvertorService.convertToTargetUnit(quantity , testUnit);
+        Assertions.assertThrows(UnitConvertorException.class, () -> {
+            unitConvertorService.convertToTargetUnit(quantity , testUnit);
+        });
     }
 
-    @Test(expected = UnitConvertorException.class)
+    @Test
     public void convertToTargetUnitKilometerToKilogramShouldThrowException() throws UnitConvertorException {
         Quantity quantity = new Quantity(2.5, "km");
-        unitConvertorService.convertToTargetUnit(quantity, "kg");
+        Assertions.assertThrows(UnitConvertorException.class, () -> {
+            unitConvertorService.convertToTargetUnit(quantity, "kg");
+        });
     }
 }
