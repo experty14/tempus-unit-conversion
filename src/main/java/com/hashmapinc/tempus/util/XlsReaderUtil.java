@@ -1,6 +1,5 @@
 package com.hashmapinc.tempus.util;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.IOException;
@@ -11,9 +10,9 @@ public class XlsReaderUtil {
     private final DataFormatter dataFormatter = new DataFormatter();
     private static final String PI = "3.14159";
 
-    public Workbook getWorkbook(String workBook) throws IOException, InvalidFormatException {
+    public Workbook getWorkbook(String workBook) throws IOException {
 
-        InputStream inputStream = ClassLoader.getSystemClassLoader()
+        InputStream inputStream = getClass().getClassLoader()
                 .getResourceAsStream(workBook);
 
         if (inputStream != null) {
