@@ -111,6 +111,6 @@ Can be used with the following maven dependancy
          <dependency>
             <groupId>com.hashmapinc.tempus</groupId>
             <artifactId>tempus-unit-conversion</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
 ```
