@@ -46,7 +46,7 @@ public class UnitConvertorServiceImpl implements UnitConvertorService {
                     unitSetMap.put(unit , unitSet);
                 }
             });
-        } catch (IOException | InvalidFormatException e) {
+        } catch (IOException e) {
             throw new UnitConvertorException(e.getMessage(), e);
         }
     }
