@@ -45,7 +45,7 @@ public class QuantityClassSetServiceImpl implements QuantityClassSetService {
                     quantityClassMemberUnits.put(quantityClassName , memberUnits);
                 }
             });
-        } catch (IOException | InvalidFormatException e) {
+        } catch (IOException e) {
             throw new QuantityClassSetException(e.getMessage(), e);
         }
     }

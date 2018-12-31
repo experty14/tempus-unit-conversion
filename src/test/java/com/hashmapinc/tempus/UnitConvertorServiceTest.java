@@ -5,7 +5,7 @@ import com.hashmapinc.tempus.exception.UnitConvertorException;
 import com.hashmapinc.tempus.model.Quantity;
 import com.hashmapinc.tempus.service.UnitConvertorService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class UnitConvertorServiceTest {
@@ -13,7 +13,7 @@ public class UnitConvertorServiceTest {
     private UnitConvertorService unitConvertorService;
     private String testUnit = "testUnit";
 
-    @BeforeAll
+    @BeforeEach
     public void setUp() throws UnitConvertorContextException {
         unitConvertorService = UnitConvertorContext.getInstanceOfUnitConvertorService();
     }
@@ -38,6 +38,14 @@ public class UnitConvertorServiceTest {
         Assertions.assertNotNull(siQuantity);
 
         Assertions.assertEquals(Double.valueOf(10000.0), siQuantity.getValue());
+    }
+
+    @Test
+    public void convertToSiUnitDegCelcius() throws UnitConvertorException {
+        Quantity quantity = new Quantity(10.0, "degC");
+        Quantity siQuantity = unitConvertorService.convertToSiUnit(quantity);
+        Assertions.assertNotNull(siQuantity);
+        Assertions.assertEquals(Double.valueOf(283.15), siQuantity.getValue());
     }
 
     @Test
@@ -68,7 +76,6 @@ public class UnitConvertorServiceTest {
     @Test
     public void convertQuantityToSiUnitThrowException() throws UnitConvertorException {
         Quantity quantity = new Quantity(10.0, testUnit);
-        unitConvertorService.convertToSiUnit(quantity);
         Assertions.assertThrows(UnitConvertorException.class, () -> {
             unitConvertorService.convertToSiUnit(quantity);
         });

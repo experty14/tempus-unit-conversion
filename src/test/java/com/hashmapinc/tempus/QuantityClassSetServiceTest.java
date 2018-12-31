@@ -4,7 +4,7 @@ import com.hashmapinc.tempus.exception.QuantityClassSetException;
 import com.hashmapinc.tempus.exception.UnitConvertorContextException;
 import com.hashmapinc.tempus.service.QuantityClassSetService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -14,7 +14,7 @@ public class QuantityClassSetServiceTest {
 
     private QuantityClassSetService quantityClassSetService;
 
-    @BeforeAll
+    @BeforeEach
     public void setUp() throws UnitConvertorContextException {
         quantityClassSetService = UnitConvertorContext.getInstanceOfQuantityClassSetService();
     }
