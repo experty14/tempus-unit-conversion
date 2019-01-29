@@ -10,4 +10,6 @@ public interface UnitConvertorService {
     Quantity convertToSiUnit(Quantity quantity)throws UnitConvertorException;
 
     Quantity convertToTargetUnit(Quantity quantity, String unit) throws UnitConvertorException;
+
+    String getBaseUnit(String unit);
 }
