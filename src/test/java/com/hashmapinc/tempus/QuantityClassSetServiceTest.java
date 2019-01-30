@@ -28,7 +28,7 @@ public class QuantityClassSetServiceTest {
     public void getAllQuantityClass() throws QuantityClassSetException {
         Set quantitySetClasses = quantityClassSetService.getAllQuantityClass();
         Assertions.assertNotNull(quantitySetClasses);
-        Assertions.assertEquals(175, quantitySetClasses.size());
+        Assertions.assertEquals(211, quantitySetClasses.size());
     }
 
     @Test
@@ -56,6 +56,6 @@ public class QuantityClassSetServiceTest {
     public void  getMemberUnitsForAllQuantityClass() throws QuantityClassSetException {
         Map quantityClassMap = quantityClassSetService.getMemberUnitsForAllQuantityClass();
         Assertions.assertNotNull(quantityClassMap);
-        Assertions.assertEquals(175, quantityClassMap.size());
+        Assertions.assertEquals(211, quantityClassMap.size());
     }
 }

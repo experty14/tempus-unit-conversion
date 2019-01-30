@@ -28,7 +28,7 @@ class UnitSystemServiceTest {
 
     @Test
     public void getAllQuantityClass() throws UnitSystemSetException {
-        assertEquals("f2", unitSystemService.getUnitFor(UnitSystem.ENGLISH, "m2"));
+        assertEquals("lbm/(ft2.s)", unitSystemService.getUnitFor(UnitSystem.ENGLISH, "kg/(m2.s)"));
     }
 
 }
