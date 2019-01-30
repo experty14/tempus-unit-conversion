@@ -1,7 +1,7 @@
 package com.hashmapinc.tempus.model;
 
 public enum UnitSystemClassCell {
-    BASE(4),
+    QUANTITY_CLASS(2),
     ENGLISH(5),
     METRIC(6),
     CANADIAN(7);

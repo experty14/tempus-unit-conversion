@@ -1,16 +1,13 @@
 package com.hashmapinc.tempus.service;
 
 import com.hashmapinc.tempus.UnitConvertorContext;
-import com.hashmapinc.tempus.exception.QuantityClassSetException;
 import com.hashmapinc.tempus.exception.UnitConvertorContextException;
 import com.hashmapinc.tempus.exception.UnitSystemSetException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UnitSystemServiceTest {
 
@@ -30,5 +27,11 @@ class UnitSystemServiceTest {
     public void getAllQuantityClass() throws UnitSystemSetException {
         assertEquals("lbm/(ft2.s)", unitSystemService.getUnitFor(UnitSystem.ENGLISH, "kg/(m2.s)"));
     }
+
+    @Test
+    public void shouldThrowExceptionForBaseUnitAsSource() {
+        Assertions.assertThrows(UnitSystemSetException.class, () -> unitSystemService.getUnitFor(UnitSystem.ENGLISH, "B"));
+    }
+
 
 }
