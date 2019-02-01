@@ -7,7 +7,7 @@
     <groupId>com.hashmapinc.tempus</groupId>
     <artifactId>tempus-unit-conversion</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <name>Tempus Unit Conversion</name>
     <description>Provide API's for unit conversion</description>
