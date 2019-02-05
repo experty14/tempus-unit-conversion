@@ -40,8 +40,6 @@ public class UnitSystemServiceImpl implements UnitSystemService {
                     String metricUnit = reader.getStringValueFromRow(row , UnitSystemClassCell.METRIC.getCellNo()).replaceAll("\\s+", "");
                     String canadianUnit = reader.getStringValueFromRow(row , UnitSystemClassCell.CANADIAN.getCellNo()).replaceAll("\\s+", "");
 
-                    //final String unitExists = unitAndQuantityClass.computeIfAbsent(englishUnit, key1 -> unitAndQuantityClass.computeIfAbsent(metricUnit, key2 -> unitAndQuantityClass.getOrDefault(canadianUnit, null)));
-
                     unitAndQuantityClass.put(englishUnit, quantityClass);
                     unitAndQuantityClass.put(metricUnit, quantityClass);
                     unitAndQuantityClass.put(canadianUnit, quantityClass);

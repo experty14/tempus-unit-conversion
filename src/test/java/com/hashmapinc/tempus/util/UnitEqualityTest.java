@@ -34,7 +34,6 @@ class UnitEqualityTest {
     @ParameterizedTest(name = "{index} => unit1={0}, unit2={1}, isSimilar={2}")
     @MethodSource("unitsProvider")
     public void checkIfEquals(String unit1, String unit2, boolean expected) {
-        //System.out.println(Utility.checkIfEquals("s/((f*a)*s)", "m/(a*(s*f))"));
         assertEquals(expected, UnitEquality.check(unit1, unit2));
     }
 }

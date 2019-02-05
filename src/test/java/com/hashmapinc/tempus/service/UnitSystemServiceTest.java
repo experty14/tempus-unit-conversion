@@ -29,9 +29,12 @@ class UnitSystemServiceTest {
     }
 
     @Test
+    public void getAllQuantityClassForDogLegAngleGradient() throws UnitSystemSetException {
+        assertEquals("deg/100ft", unitSystemService.getUnitFor(UnitSystem.ENGLISH, "deg/100ft"));
+    }
+
+    @Test
     public void shouldThrowExceptionForBaseUnitAsSource() {
         Assertions.assertThrows(UnitSystemSetException.class, () -> unitSystemService.getUnitFor(UnitSystem.ENGLISH, "B"));
     }
-
-
 }
