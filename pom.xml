@@ -7,7 +7,7 @@
     <groupId>com.hashmapinc.tempus</groupId>
     <artifactId>tempus-unit-conversion</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <name>Tempus Unit Conversion</name>
     <description>Provide API's for unit conversion</description>
@@ -24,6 +24,7 @@
         <apache.poi.version>4.0.1</apache.poi.version>
         <lombok.version>1.18.4</lombok.version>
         <junit.version>5.3.2</junit.version>
+        <junit-jupiter-params.version>5.3.2</junit-jupiter-params.version>
     </properties>
 
     <developers>
@@ -140,6 +141,26 @@
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <argLine>
+                        --illegal-access=permit
+                    </argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <argLine>
+                        --illegal-access=permit
+                    </argLine>
+                </configuration>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -173,7 +194,18 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit-jupiter-params.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 

@@ -5,8 +5,8 @@ import com.hashmapinc.tempus.model.Quantity;
 import com.hashmapinc.tempus.model.UnitConstants;
 import com.hashmapinc.tempus.model.UnitSet;
 import com.hashmapinc.tempus.model.UnitSetCell;
+import com.hashmapinc.tempus.util.UnitEquality;
 import com.hashmapinc.tempus.util.XlsReaderUtil;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class UnitConvertorServiceImpl implements UnitConvertorService {
 
@@ -53,7 +54,7 @@ public class UnitConvertorServiceImpl implements UnitConvertorService {
 
     @Override
     public Quantity convertToSiUnit(Quantity quantity) throws UnitConvertorException {
-        UnitSet unitSet = unitSetMap.get(quantity.getUnit());
+        UnitSet unitSet = getSameOrSimilarUnitSet(quantity.getUnit());
         if (unitSet != null && unitSet.getBaseUnit().equals(IS_BASE)) {
             return quantity;
         } else if (unitSet == null) {
@@ -62,10 +63,20 @@ public class UnitConvertorServiceImpl implements UnitConvertorService {
         return convertQuantityToSiUnit(quantity.getValue() , unitSet);
     }
 
+    private UnitSet getSameOrSimilarUnitSet(String givenUnit) throws UnitConvertorException {
+        UnitSet unitSet = unitSetMap.get(givenUnit.replaceAll("\\s+", ""));
+        if(unitSet == null){
+            final Optional<String> optionalUnit = unitSetMap.keySet().stream().filter(unit -> UnitEquality.check(givenUnit, unit)).findFirst();
+            String unitSetStr = optionalUnit.orElseThrow(() -> new UnitConvertorException(UNIT_NOT_SUPPORTED_MSG));
+            unitSet = unitSetMap.get(unitSetStr);
+        }
+        return unitSet;
+    }
+
     @Override
     public Quantity convertToTargetUnit(Quantity quantity , String unit) throws UnitConvertorException {
-        UnitSet givenUnitSet = unitSetMap.get(quantity.getUnit());
-        UnitSet targetUnitSet = unitSetMap.get(unit);
+        UnitSet givenUnitSet = getSameOrSimilarUnitSet(quantity.getUnit());
+        UnitSet targetUnitSet = getSameOrSimilarUnitSet(unit);
 
         if (givenUnitSet != null && targetUnitSet != null) {
             if (givenUnitSet.equals(targetUnitSet)) {
@@ -83,6 +94,12 @@ public class UnitConvertorServiceImpl implements UnitConvertorService {
         } else {
             throw new UnitConvertorException(UNIT_NOT_SUPPORTED_MSG);
         }
+    }
+
+    @Override
+    public String getBaseUnit(String unit) {
+        if(unitSetMap.get(unit).getBaseUnit().equals(IS_BASE)) return unit;
+        else return unitSetMap.get(unit).getBaseUnit();
     }
 
     private Quantity convertSiToTargetUnit(Quantity quantity , UnitSet unitSet) {
@@ -108,8 +125,8 @@ public class UnitConvertorServiceImpl implements UnitConvertorService {
     }
 
     private UnitSet createUnitSet(Row row, String unit) {
-        String name = reader.getStringValueFromRow(row, UnitSetCell.NAME.getCellNo());
-        String baseUnit = reader.getStringValueFromRow(row, UnitSetCell.BASE_UNIT.getCellNo());
+        String name = reader.getStringValueFromRow(row, UnitSetCell.NAME.getCellNo()).replaceAll("\\s+", "");
+        String baseUnit = reader.getStringValueFromRow(row, UnitSetCell.BASE_UNIT.getCellNo()).replaceAll("\\s+", "");
         UnitConstants unitConstants = createUnitConstant(row);
         return new UnitSet(unit , name , baseUnit , unitConstants);
     }

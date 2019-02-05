@@ -1,5 +1,6 @@
-package com.hashmapinc.tempus;
+package com.hashmapinc.tempus.service;
 
+import com.hashmapinc.tempus.UnitConvertorContext;
 import com.hashmapinc.tempus.exception.UnitConvertorContextException;
 import com.hashmapinc.tempus.exception.UnitConvertorException;
 import com.hashmapinc.tempus.model.Quantity;
